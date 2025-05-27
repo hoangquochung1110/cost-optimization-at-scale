@@ -17,7 +17,7 @@ Khi tài nguyên không tuân thủ logic được định nghĩa trong quy tắ
 
 Giải pháp này cho phép các tổ chức đã sử dụng AWS Config tối đa hóa lợi ích sử dụng bằng cách tích hợp quản trị tối ưu chi phí tự động vào hạ tầng hiện có. Giải pháp linh hoạt này cung cấp ba quy tắc tùy chỉnh mẫu thể hiện các thực hành tốt nhất về tối ưu chi phí, liên tục giám sát cấu hình tài nguyên và báo cáo tình trạng tuân thủ về bộ tổng hợp AWS Config tập trung trong tài khoản 'quản trị viên được ủy quyền' để giám sát và báo cáo được đơn giản hóa.
 
-![Architecture Overview](/images/5.conformancepack/007-architecture-overview.png)
+![Architecture Overview](images/5.conformancepack/007-architecture-overview.png)
 
 Việc triển khai bao gồm các quy tắc quản trị sau:
 
