@@ -8,6 +8,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      HUGO_BASEURL: "https://hoangquochung1110.github.io/cost-optimization-at-scale/"
     steps:
       # Checkout the repository and submodules (for Hugo themes)
       - name: Checkout source
@@ -21,9 +23,9 @@ jobs:
         with:
           hugo-version: '0.123.8'
 
-      # Build the site
+      # Build the site with environment variable for baseURL
       - name: Build
-        run: hugo --minify
+        run: hugo --minify --baseURL="${HUGO_BASEURL}"
 
       # Deploy to GitHub Pages branch
       - name: Deploy to GitHub Pages
