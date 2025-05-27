@@ -1,5 +1,5 @@
 ---
-title : "Scaling Organizational Cost Control: Practical Deployment of AWS Config"
+title : "Multi-Account Cost Optimization at Scale: Implementing AWS Config Conformance Packs"
 date : "2025-05-14"
 weight : 1
 chapter : false

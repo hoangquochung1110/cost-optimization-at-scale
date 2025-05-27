@@ -1,5 +1,5 @@
 ---
-title : "Mở Rộng Kiểm Soát Chi Phí Toàn Tổ Chức: Triển Khai AWS Config"
+title : "Tối ưu Chi phí Multi-Account quy mô lớn với AWS Config Conformance Packs"
 date : "2025-05-14"
 weight : 1 
 chapter : false
