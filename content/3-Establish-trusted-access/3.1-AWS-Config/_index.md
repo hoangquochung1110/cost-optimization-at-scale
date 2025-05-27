@@ -1,49 +1,32 @@
 ---
-title : "Connect to Public Instance"
+title : "Enable trusted access between AWS Organizations and AWS Config"
 date : "2025-05-14"
 weight : 1
 chapter : false
-pre : " <b> 3.1. </b> "
+pre : " <b> 3.1. </b>"
 ---
-![SSMPublicinstance](/images/arc-02.png)
 
-1. Go to [EC2 service management console](https://console.aws.amazon.com/ec2/v2/home).
-  + Click on **Public Linux Instance**.
-  + Click **Actions**.
-  + Click **Security**.
-  + Click **Modify IAM role**.
+#### Overview
+This setup allows AWS Config to perform cross-account operations without requiring administrators to manually configure permission policies in each account.
 
-![Connect](/images/3.connect/001-connect.png)
+The following steps include:
 
-2. At the Modify IAM role page.
-  + Click to select **SSM-Role**.
-  + Click **Save**.
+- enable the core AWS Config service integration
+- enable multi-account deployment and aggregation features
 
-{{% notice note %}}
-You will need to wait about 10 minutes before performing the next step. This time our EC2 instance will automatically register with the Session Manager.
-{{% /notice %}}
+#### Steps to follow
 
-3. Go to the [AWS Systems Manager service management console](https://console.aws.amazon.com/systems-manager/home)
-  + Drag the left menu slider down.
-  + Click **Session Manager**.
-  + Click **Start Session**.
+1. Sign in to the AWS Management Console as the management account and open AWS Config.
 
+2. Open AWS CloudShell.
+![Activate trusted access banner](/images/3.establish/001-cloudshell.png)
 
-![Connect](/images/3.connect/002-connect.png)
+3. Execute the following two commands:
 
+    ```bash
+    aws organizations enable-aws-service-access --service-principal=config-multiaccountsetup.amazonaws.com
+    ```
 
-4. Then select **Public Linux Instance** and click **Start session** to access the instance.
-
-![Connect](/images/3.connect/003-connect.png)
-
-
-5. Terminal will appear on the browser. Testing with the command ``` sudo tcpdump -nn port 22 ``` and ```sudo tcpdump ``` we will see no SSH traffic but only HTTPS traffic.
-
-![Connect](/images/3.connect/004-connect.png)
-
-{{% notice note %}}
- Above, we have created a connection to the public instance without opening SSH port 22, for better security, avoiding any attack to the SSH port.\
-One disadvantage of the above method is that we have to open the Security Group outbound at port 443 to the internet. Since it's a public instance, it probably won't be a problem, but if you want extra security, you can block port 443 to the internet and still use the Session Manager. We will go through this in the private instance section below.
- {{% /notice %}}
-
- You can click terminate to end the currently connected session before proceeding to the next step.
+    ```bash
+    aws organizations enable-aws-service-access --service-principal=config.amazonaws.com
+    ```

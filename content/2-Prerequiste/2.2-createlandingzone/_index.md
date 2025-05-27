@@ -1,51 +1,50 @@
 ---
-title : "Thiết lập Landing Zone"
-date : "2025-05-14" 
+title : "Set up Landing Zone"
+date : "2025-05-14"
 weight : 2
 chapter : false
-pre : " <b> 2.1.2 </b> "
+pre : " <b> 2.2 </b>"
 ---
 
-#### Thiết lập Landing Zone
+#### Set up Landing Zone
 
-1. Truy cập giao diện quản trị dịch vụ [AWS Control Tower](https://console.aws.amazon.com/controltower/home/landing#):
-  
-    - Chọn **Set up landing zone**.
-  
-    - Mất khoảng 15 phút để AWS Control Tower hoàn tất quá trình thiết lập
-  
-    - Sau khi hoàn tất, về cơ bản, Control Tower sẽ tự động tạo hai tài khoản thành viên bắt
-buộc: tài khoản Audit (Kiểm toán) và  tài khoản Log Archive (Lưu trữ nhật  ký) cũng như thiết lập cấu trúc Organizational Units (OU) cơ bản: Security OU (chứa tài khoản Audit và Log Archive), Sandbox OU (để thử nghiệm) và Root OU (chứa management account)
+1. Access the AWS Control Tower Management Console ([AWS Control Tower](https://console.aws.amazon.com/controltower/home/landing#)):
+
+   - Select **Set up landing zone**.
+
+   - It takes approximately 15 minutes for AWS Control Tower to complete the setup.
+
+   - Once completed, Control Tower automatically creates two mandatory member accounts: the Audit account and the Log Archive account, and sets up the basic Organizational Units (OUs): Security OU (containing the Audit and Log Archive accounts), Sandbox OU (for testing), and Root OU (containing the management account).
 
 ![Landing Zone](/images/2.prerequisite/002-landingzone.png)
 
-2. Kiểm tra cấu trúc Organizational Units (OUs)
-    - Truy cập phần "Organization" trong Control Tower
+2. Review the Organizational Units (OUs) structure:
 
-    - Xác nhận các OU cơ bản đã được tạo:
-  
-        • Security OU (chứa các tài khoản Audit và Log Archive)
-        • Sandbox OU (dành cho môi trường thử nghiệm)
-        • Root OU (chứa Management account)
-  
-    - Kiểm tra các OU bổ sung nếu bạn đã cấu hình thêm
+   - Navigate to the "Organization" section in Control Tower.
 
-3. Xác minh các tài khoản cốt lõi
+   - Confirm the creation of the following basic OUs:
 
-    - Trong phần "Organization", kiểm tra các tài khoản đã được tạo:
-    
-        • Management account (tài khoản gốc của bạn)
+     • Security OU (containing the Audit and Log Archive accounts)
+   
+     • Sandbox OU (for test environments)
+   
+     • Root OU (containing the management account)
 
-        • Audit account (tài khoản kiểm toán)
-        
-        • Log Archive account (tài khoản lưu trữ nhật ký)
+   - Verify any additional OUs you configured.
 
-    - Xác nhận các tài khoản này đã được phân bổ vào đúng OU
+3. Verify the core accounts:
+
+   - In the "Organization" section, verify the following accounts:
+     • Management account (your root account)
+     • Audit account
+     • Log Archive account
+
+   - Ensure these accounts are assigned to the correct OUs.
 
 ![Landing Zone](/images/2.prerequisite/003-landingzone.png)
 
-💡 Trong quá trình thiết lập Landing Zone, AWS Control Tower sẽ tự động cài đặt cấu hình dịch vụ AWS Config cho các tài khoản thành viên (phương thức ghi chép, kênh phân phối). Đối với tài khoản kiểm toán, Control Tower sẽ cài đặt AWS Config Aggregator, một lọại tài nguyên giúp giám sát tập trung các quy tắc tuân thủ của các tài nguyên trên toàn tổ chức
+💡 During the Landing Zone setup, AWS Control Tower automatically configures AWS Config for member accounts (recorders, delivery channels). For the Audit account, Control Tower deploys an AWS Config Aggregator, which provides centralized monitoring of compliance rules for resources across the organization.
 
-📌 Sơ đồ minh họa AWS Control Tower tự động thiết lập và quản trị môi trường đa tài khoản với nền tảng quản trị, bảo mật chuẩn hóa và cấp phát tài khoản thông qua tài khoản quản lý trung tâm.
+📌 The diagram illustrates how AWS Control Tower automatically provisions and governs a multi-account environment with standardized governance, security, and account provisioning through the central management account.
 
 ![Landing Zone](/images/2.prerequisite/004-landingzone.png)

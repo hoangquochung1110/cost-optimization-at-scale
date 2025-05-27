@@ -1,34 +1,34 @@
 ---
-title : "Update IAM Role"
-date : "2025-05-14"
-weight : 1
+title : "Register delegated administrator account for AWS Config"
+date : "2025-05-14" 
+weight : 1 
 chapter : false
-pre : " <b> 4.1 </b> "
+pre : " <b> 4.1 </b>"
 ---
 
-For our EC2 instances to be able to send session logs to the S3 bucket, we will need to update the IAM Role assigned to the EC2 instance by adding a policy that allows access to S3.
+#### Steps to follow
+1. Sign in to the AWS Management Console using the Audit account. You can verify the organization's account structure in the [Set up Landing Zone](../../2-Prerequiste/2.1-setupmultiaccount/2.1.2-createlandingzone/) step.
 
-#### Update IAM Role
+2. Run the following commands:
 
-1. Go to [IAM service management console](https://console.aws.amazon.com/iamv2/home?#/home)
-  + Click **Roles**.
-  + In the search box, enter **SSM**.
-  + Click on the **SSM-Role** role.
+    ```bash
+    aws organizations register-delegated-administrator --account-id $ACCOUNT_ID --service-principal config-multiaccountsetup.amazonaws.com
+    ```
 
-![S3](/images/4.s3/002-s3.png)
+    and
 
-2. Click **Attach policies**.
- 
-![S3](/images/4.s3/003-s3.png)
+    ```bash
+    aws organizations register-delegated-administrator --account-id $ACCOUNT_ID --service-principal config.amazonaws.com
+    ```
 
-3. In the Search box enter **S3**.
-  + Click the policy **AmazonS3FullAccess**.
-  + Click **Attach policy**.
- 
-![S3](/images/4.s3/004-s3.png)
- 
-{{%notice tip%}}
-In the production environment, we will grant stricter permissions to the specified S3 bucket. In the framework of this lab, we use the policy **AmazonS3FullAccess** for convenience.
-{{%/notice%}}
+3. To verify that the Audit account has been successfully registered as a delegated administrator for AWS Config, run the following commands:
 
-Next, we will proceed to create an S3 bucket to store session logs.
+    ```bash
+    aws organizations list-delegated-administrators --service-principal=config.amazonaws.com
+    ```
+
+    and
+
+    ```bash
+    aws organizations list-delegated-administrators --service-principal=config-multiaccountsetup.amazonaws.com
+    ```

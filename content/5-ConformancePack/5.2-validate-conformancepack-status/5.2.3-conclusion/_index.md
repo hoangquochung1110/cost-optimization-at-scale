@@ -1,21 +1,21 @@
 ---
-title : "Kết luận"
+title : "Conclusion"
 date : "2025-05-14" 
 weight : 3
 chapter : false
-pre : " <b> 5.3.3 </b> "
+pre : " <b> 5.2.3 </b> "
 ---
 
-Như vậy chúng ta đã triển khai hàng loạt AWS Config Conformance Pack lên các tài khoản thành viên.
+Thus, we have deployed a series of AWS Config Conformance Packs to the member accounts.
 
-Conformance pack bao gồm các quy tắc sau:
+The conformance pack includes the following rules:
 
-1. CostOpt-S3-WithoutLifecycle: phát hiện những S3 buckets không được cấu hình chính sách vòng đời.
+1. `CostOpt-S3-WithoutLifecycle`: detects S3 buckets that are not configured with a lifecycle policy.
 
-2. CostOpt-Ebs-Gp3: nhận biết ổ cứng EBS mà không sử dụng loại ổ cứng gp3.
+2. `CostOpt-Ebs-Gp3`: identifies EBS volumes that are not using the gp3 volume type.
 
-3. CostOpt-Ebs-Unattached: nhận biết các ổ cứng EBS không được gán (vào máy chủ EC2) có thể gây phát sinh chi phí không cần thiết.
+3. `CostOpt-Ebs-Unattached`: identifies unattached EBS volumes (not attached to EC2 instances) that may incur unnecessary costs.
 
-Trong số ba quy tắc này, chúng ta cũng cài đặt một hành động khắc phục sử dụng SSM Document `CostOptimizationConfPack-EbsGp3Remediation` to convert eligible EBS volumes from other types (
-like gp2) to the more cost-effective gp3 type without changing other volume
-attributes.
+These are all custom rules with evaluation logic defined via Lambda functions. Among these three rules, we also implement a remediation action using the SSM Document `CostOptimizationConfPack-EbsGp3Remediation` to convert any EBS volume using gp2 to the cost-saving gp3 type.
+
+All of the above resources are automated through the CloudFormation service.

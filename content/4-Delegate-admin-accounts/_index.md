@@ -1,23 +1,29 @@
 ---
-title : "Manage session logs"
+title : "Activate Delegated Administrator Accounts"
 date : "2025-05-14"
 weight : 4
 chapter : false
 pre : " <b> 4. </b> "
 ---
 
+In this step, we designate a member account (not the management account) to perform specific administrative tasks for designated AWS services across your organization.
 
-With Session Manager, we can view the history of connections to instances through **Session history**. However, we have not seen the details of the commands used in a session.
+{{% notice info %}}
+The management account should be used only for organizational management tasks.
+{{% /notice %}}
 
-![S3](/images/4.s3/001-s3.png)
+In this section, we will create an S3 bucket and configure session log storage to capture the details of commands used in a session.
 
-In this section, we will proceed to create an S3 bucket and configure the session logs feature to see the details of the commands used in the session.
+### Why ?
 
-![port-fwd](/images/arc-log.png) 
+- Separation of duties – Administrative responsibilities can be distributed to specialized teams using dedicated member accounts.
+- Reduced management account access – Fewer individuals need access to the management account, improving security.
+- Service specialization – Service administrators can manage their respective services organization-wide.
+- Operational efficiency – Service administrators can work directly from their assigned accounts without switching to the management account.
+- Compliance requirements – Meets compliance needs that require separation of duties.
 
-### Content:
+### Contents
 
-   - [Update IAM Role](./4.1-updateiamrole/)
-   - [Create **S3 Bucket**](./4.2-creates3bucket/)
-   - [Create S3 Gateway endpoint](./4.3-creategwes3)
-   - [Configure **Session logs**](./4.4-configsessionlogs/)
+- [Register a delegated administrator for AWS Config](./4.1-delegated-admin-account-for-aws-config/)  
+- [Register a delegated administrator for AWS CloudFormation](./4.2-delegated-admin-account-for-aws-cloudformation/)  
+- [Create required IAM roles](./4.3-createrole/)

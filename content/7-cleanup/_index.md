@@ -1,12 +1,37 @@
 +++
 title = "Clean up resources"
-date = 2022
-weight = 6
+date = "2025-05-14"
+weight = 7
 chapter = false
-pre = "<b>6. </b>"
+pre = "<b>7. </b>"
 +++
 
-We will take the following steps to delete the resources we created in this exercise.
+We will perform the following steps to delete the resources we created in this exercise.
+
+#### Clean up all resources created by CloudFormation
+
+1. Open the CloudFormation console (https://console.aws.amazon.com/cloudformation) using the delegated administrator account.
+   - In AWS CloudShell, run:
+     ```bash
+     aws cloudformation delete-stack --stack-name CostOptimizationConfPack
+     ```
+   ![CloudFormation stack delete](/images/7.clean/001-clean.png)
+   - Wait until all stacks are deleted.
+     ![CloudFormation stack delete](/images/7.clean/002-clean.png)
+
+2. Continue using the same CloudShell session to revoke delegated administrator permissions. Run the following commands:
+
+   ```bash
+   aws organizations deregister-delegated-administrator --account-id $ACCOUNT_ID --service-principal config-multiaccountsetup.amazonaws.com
+   aws organizations deregister-delegated-administrator --account-id 123412341234 --service-principal config.amazonaws.com
+   ```
+
+#### Delete EBS volumes
+
+1. Open the EC2 console (https://console.aws.amazon.com/ec2) using a member account.
+
+2. Delete the EBS volume.
+   ![EBS volume delete](/images/7.clean/003-clean.png)
 
 #### Delete EC2 instance
 

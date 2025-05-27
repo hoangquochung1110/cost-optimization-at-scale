@@ -1,28 +1,20 @@
 ---
-title : "Kích hoạt AWS Organizations"
-date : "2025-05-14" 
-weight : 1 
+title : "Enable AWS Organizations"
+date : "2025-05-14"
+weight : 1
 chapter : false
-pre : " <b> 2.1.1 </b> "
+pre : " <b> 2.1 </b>"
 ---
 
+{{% notice note %}}
+To begin, you need an AWS account that hasn't joined AWS Organizations yet.
+{{% /notice %}}
 
-#### Chuẩn bị IAM user
-Sử dụng một IAM user và đảm bảo IAM user này có các quyền sau:
+### Enable AWS Organizations (Console)
 
-  • `organizations:CreateOrganization`
+1. In the AWS Management Console, in the top-left corner next to Services, click the search box, type "AWS Organizations", and select the service.
 
-  • `organizations:DescribeOrganization`
-
-  • `organizations:ListRoots`
-
-Lý tưởng nhất là IAM user nên có chính sách quản trị như `AdministratorAccess`
-
-### Kích hoạt AWS Organizations (Console)
-
-1. Trong AWS Management Console, ở góc trên bên trái cạnh Services, nhấp vào ô tìm kiếm và nhập “AWS Organizations”, sau đó chọn dịch vụ này.
-
-2. Nhấp vào Create Organization. Theo mặc định, tổ chức được tạo với tất cả các tính năng được kích hoạt.
+2. Click Create Organization. By default, the organization is created with all features enabled.
     ![Create Organization](/images/2.prerequisite/001-createorganization.png)
 
-3. Tổ chức được tạo và trang AWS accounts xuất hiện. Tài khoản duy nhất hiện có là management account của bạn, và hiện đang nằm dưới root organizational unit (OU).
+3. The organization is created and the AWS Accounts page appears. The only account currently available is your management account, and it is now under the root organizational unit (OU).

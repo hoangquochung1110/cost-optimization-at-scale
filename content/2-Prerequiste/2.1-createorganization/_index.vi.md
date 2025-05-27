@@ -6,17 +6,10 @@ chapter : false
 pre : " <b> 2.1 </b> "
 ---
 
+{{% notice note %}}
+Để bắt đầu, bạn cần một AWS account chưa tham gia vào AWS Organizations
+{{% /notice %}}
 
-#### Chuẩn bị IAM user
-Sử dụng một IAM user và đảm bảo IAM user này có các quyền sau:
-
-  • `organizations:CreateOrganization`
-
-  • `organizations:DescribeOrganization`
-
-  • `organizations:ListRoots`
-
-Lý tưởng nhất là IAM user nên có chính sách quản trị như `AdministratorAccess`
 
 ### Kích hoạt AWS Organizations (Console)
 

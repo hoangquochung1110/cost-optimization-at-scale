@@ -1,10 +1,18 @@
 ---
-title : "Deploying AWS Config Conformance Packs at Organization Scale"
+title : "Scaling Organizational Cost Control: Practical Deployment of AWS Config"
 date : "2025-05-14"
-weight : 1 
+weight : 1
 chapter : false
 ---
 
-# Deploying AWS Config Conformance Packs at Organization Scale
+# Scaling Organizational Cost Control: Practical Deployment of AWS Config
 
-This guide demonstrates how AWS Config Rules integrate with Systems Manager Automation to create automated remediation workflows across multiple AWS accounts. We'll explore the technical architecture and step-by-step implementation of conformance packs and AWS Config Aggregator serving as the central hub for collecting and monitoring compliance data from all organizational accounts.
+Learn how to configure AWS Config rules, package them into a single unit — Conformance Packs.
+This enables you to deploy and manage hundreds of Config rules across your AWS Organization and
+ensure consistent compliance standards across all accounts and regions with a single action.
+
+It also automates remediation workflows through Systems Manager, integrated with AWS Config
+Aggregator as the central hub for collecting and monitoring compliance data from all accounts in
+your organization.
+
+![Intro](/images/1.introduction/001-introduction.png)

@@ -1,38 +1,38 @@
 ---
-title : "Giới thiệu"
-date : "2025-05-14" 
-weight : 1 
+title : "Introduction"
+date : "2025-05-14"
+weight : 1
 chapter : false
 pre : " <b> 1. </b> "
 ---
 
-#### Tổng quan
+#### Overview
 
-**AWS Config** là dịch vụ liên tục đánh giá, kiểm tra và phân tích cấu hình cùng mối quan hệ giữa các tài nguyên trên AWS, on-premises và các đám mây khác. Bài viết này hướng dẫn cách tăng cường giá trị của AWS Config thông qua việc triển khai giải pháp toàn tổ chức, tự động đánh giá tài nguyên theo các thực hành tốt nhất cho tối ưu chi phí sử dụng tính năng Conformance Packs.
+**AWS Config** is a service that continuously assesses, audits, and evaluates the configurations and relationships of AWS, on-premises, and multi-cloud resources. This guide shows how to enhance the value of AWS Config by deploying an organization-wide solution that automatically evaluates resources against cost optimization best practices using Conformance Packs.
 
-**Conformance Pack** là tập hợp các quy tắc AWS Config và hành động khắc phục, cung cấp khung tuân thủ tổng quát để mã hóa và triển khai các kiểm tra quản trị về bảo mật, vận hành hoặc tối ưu chi phí trong một tài khoản và vùng, hoặc mở rộng ra toàn bộ AWS Organization. Các quy tắc này tự động giám sát và đánh giá tài nguyên để xác định tình trạng tuân thủ so với logic được định nghĩa trong mỗi quy tắc. AWS Config cung cấp AWS Config Managed Rules (danh sách quy tắc được định nghĩa sẵn có thể tùy chỉnh) hoặc AWS Config Custom Rules (cho phép định nghĩa logic tùy chỉnh sử dụng các hàm **AWS Lambda** hoặc AWS CloudFormation Guard - một ngôn ngữ chính sách dưới dạng mã).
-Khi tài nguyên không tuân thủ logic được định nghĩa trong quy tắc, nó sẽ được đánh dấu **Noncompliant**. Bạn có thể chọn thực hiện các bước khắc phục theo cách thủ công hoặc tự động thông qua **AWS Systems Manager** Automation - dịch vụ cung cấp trung tâm vận hành cho các ứng dụng và tài nguyên AWS, với các runbook được định nghĩa sẵn để tự động khắc phục tài nguyên không tuân thủ hoặc kích hoạt quy trình làm việc điều khiển bằng sự kiện như cảnh báo đội ngũ để hành động.
+A **Conformance Pack** is a collection of AWS Config rules and remediation actions that provides a comprehensive compliance framework to codify and deploy security, operational, or cost optimization checks within a single account and region or across an entire AWS Organization. These rules automatically monitor and assess resources to detect compliance against each rule's defined logic. AWS Config offers both **Managed Rules** (pre-built, customizable rules) and **Custom Rules** (allowing custom logic via **AWS Lambda** or AWS CloudFormation Guard—a policy-as-code language).
 
-#### Tổng quan giải pháp
+When a resource violates a rule's logic, it is marked **Noncompliant**. You can choose to remediate manually or automate remediation using **AWS Systems Manager** Automation—a central operations hub with built-in runbooks to automatically fix noncompliant resources or trigger event-driven workflows like alerting teams for action.
 
-Giải pháp này cho phép các tổ chức đã sử dụng AWS Config tối đa hóa lợi ích sử dụng bằng cách tích hợp quản trị tối ưu chi phí tự động vào hạ tầng hiện có. Giải pháp linh hoạt này cung cấp ba quy tắc tùy chỉnh mẫu thể hiện các thực hành tốt nhất về tối ưu chi phí, liên tục giám sát cấu hình tài nguyên và báo cáo tình trạng tuân thủ về bộ tổng hợp AWS Config tập trung trong tài khoản 'quản trị viên được ủy quyền' để giám sát và báo cáo được đơn giản hóa.
+#### Solution Overview
+
+This solution enables organizations already using AWS Config to maximize value by integrating automated cost optimization governance into their existing infrastructure. It provides three sample custom rules representing cost optimization best practices, continuously monitoring resource configurations and reporting compliance status to a centralized AWS Config Aggregator in the delegated administrator account for simplified monitoring and reporting.
 
 ![Architecture Overview](/images/5.conformancepack/007-architecture-overview.png)
 
-Việc triển khai bao gồm các quy tắc quản trị sau:
+The implementation includes the following governance rules:
 
-- **Quy tắc 1**: Xác định các EBS gp2 volumes Khắc phục: Tự động chuyển đổi sang gp3 volumes
-- **Quy tắc 2**: Phát hiện các EBS volumes chưa gắn vào EC2 instances
-- **Quy tắc 3**: Tìm các S3 buckets thiếu chính sách cấu hình vòng đời
+- **Rule 1**: Detect gp2 EBS volumes  
+  Remediation: Automatically convert to gp3 volumes  
+- **Rule 2**: Detect unattached EBS volumes  
+- **Rule 3**: Detect S3 buckets missing lifecycle policies  
 
-Khi tài nguyên không đáp ứng tiêu chí quy tắc, cả tài nguyên riêng lẻ và quy tắc cấu hình cùng conformance pack liên quan đều nhận trạng thái Noncompliant. Quy tắc 1 tích hợp khả năng khắc phục tự động có thể thực thi theo yêu cầu hoặc tự động, khởi chạy runbook tự động hóa SSM để di chuyển EBS volumes từ gp2 sang gp3. Việc nâng cấp này cho phép cung cấp IOPS và throughput độc lập mà không cần mở rộng lưu trữ, mang lại mức giảm chi phí lên đến 20% mỗi GB so với gp2 volumes.
+When resources do not meet rule criteria, both the individual resource and the corresponding rule in the conformance pack are marked Noncompliant. Rule 1 integrates an on-demand or automated remediation by invoking an SSM Automation runbook to convert EBS gp2 volumes to gp3. This upgrade delivers independent IOPS and throughput without additional storage, yielding up to 20% cost savings per GB compared to gp2 volumes.
 
 {{% notice info %}}
-Quan trọng: AWS Config hoạt động như dịch vụ tính phí - xem lại tài liệu giá cả để hiểu tác động chi phí tổ chức trước khi triển khai rộng rãi nếu chưa triển khai hiện tại.
+Important: AWS Config is a paid service—review pricing documentation to understand organization-level cost implications before a broad deployment if Config is not already in use.
 {{% /notice %}}
 
-Giải pháp hỗ trợ triển khai trên AWS Organizations bất kể trạng thái AWS Control Tower. AWS Control Tower cung cấp thiết lập có tổ chức và quản trị cho môi trường AWS đa tài khoản sử dụng các thực hành tốt nhất đã được thiết lập. Hình 1 minh họa việc triển khai Cost Optimization Conformance Pack trên kiến trúc OU mẫu điển hình của triển khai AWS Control Tower với các tài khoản thành viên.
-Security OU lưu trữ tài khoản kiểm toán, được chỉ định làm quản trị viên được ủy quyền cho cả AWS Config và AWS CloudFormation. Việc chỉ định này cung cấp quyền cần thiết để triển khai Cost Optimization Conformance Pack cùng các tài nguyên liên quan thông qua phân phối CloudFormation Stack trên các tài khoản trong tổ chức.
-CloudFormation Stack bao gồm các quy tắc tùy chỉnh Cost Optimization Conformance Pack cùng với hàm AWS Lambda và tài liệu AWS Systems Manager được tham chiếu bởi các quy tắc này. Hai vai trò AWS Identity and Access Management (IAM) tùy chỉnh được cung cấp thông qua CloudFormation StackSets để cho phép thực thi hàm Lambda và tài liệu Systems Manager. Tất cả thành phần triển khai toàn tổ chức từ tài khoản kiểm toán tập trung, đơn giản hóa việc quản lý giải pháp.
+This solution supports deployment across AWS Organizations regardless of AWS Control Tower status. AWS Control Tower provides an organization and governance framework for multi-account environments with established best practices. Figure 1 illustrates deploying the Cost Optimization Conformance Pack on a sample OU structure in a Control Tower environment with member accounts. The Security OU holds the auditing account, designated as the delegated administrator for both AWS Config and AWS CloudFormation. This designation provides the necessary permissions to deploy the Cost Optimization Conformance Pack and related resources via CloudFormation StackSets across accounts in the organization. The CloudFormation stack includes the custom Cost Optimization Conformance Pack rules, Lambda functions, and SSM documents referenced by those rules. Two custom IAM roles are provided through the StackSet to allow Lambda and SSM document execution. All organization-wide components are deployed from the central auditing account, simplifying solution management.
 
-AWS Config đánh giá sự tuân thủ tài nguyên với các quy tắc conformance pack theo định kỳ hoặc được kích hoạt bởi thay đổi cấu hình môi trường. Bộ tổng hợp AWS Config trong tài khoản kiểm toán tổng hợp và tập trung dữ liệu tuân thủ được thu thập trên các tài khoản thành viên, tạo điều kiện thuận lợi cho phân tích và báo cáo theo vùng.
+AWS Config evaluates resource compliance with conformance pack rules periodically or triggered by configuration changes. The AWS Config Aggregator in the auditing account consolidates and centralizes compliance data collected from member accounts, facilitating regional analysis and reporting.
