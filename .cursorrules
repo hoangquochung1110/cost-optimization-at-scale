@@ -1,0 +1,25 @@
+{
+  "framework": "hugo",
+  "language": "markdown",
+  "awsServices": ["cloudformation", "config", "organizations", "sso"],
+  "codeGeneration": {
+    "preferredLanguage": "bash",
+    "awsCliFormat": true,
+    "includeComments": true
+  },
+  "documentation": {
+    "structure": "hierarchical",
+    "multilingual": ["en", "vi"],
+    "diagrams": "mermaid"
+  },
+  "styling": {
+    "indentation": 2,
+    "maxLineLength": 100,
+    "quoteStyle": "double"
+  },
+  "aiBehavior": {
+    "preferShortcodes": true,
+    "useHugoFrontmatter": true,
+    "awsContext": true
+  }
+}
