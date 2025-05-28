@@ -1,11 +1,11 @@
 ---
-title : "Multi-Account Cost Optimization at Scale: Implementing AWS Config Conformance Packs"
+title : "Implementing AWS Config Conformance Packs at Scale"
 date : "2025-05-14"
 weight : 1
 chapter : false
 ---
 
-# Scaling Organizational Cost Control: Practical Deployment of AWS Config
+# Multi-Account Cost Optimization at Scale: Implementing AWS Config Conformance Packs
 
 Learn how to configure AWS Config rules, package them into a single unit — Conformance Packs.
 This enables you to deploy and manage hundreds of Config rules across your AWS Organization and

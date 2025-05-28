@@ -1,5 +1,5 @@
 ---
-title : "Prerequisite Steps"
+title : "Prerequisite"
 date : "2025-05-14"
 weight : 2
 chapter : false

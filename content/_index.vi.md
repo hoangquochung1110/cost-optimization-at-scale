@@ -1,11 +1,11 @@
 ---
-title : "Tối ưu Chi phí Multi-Account quy mô lớn với AWS Config Conformance Packs"
+title : "Tối ưu Chi phí quy mô lớn với AWS Config Conformance Packs"
 date : "2025-05-14"
 weight : 1 
 chapter : false
 ---
 
-# Mở Rộng Kiểm Soát Chi Phí Toàn Tổ Chức: Hướng Dẫn Thực Tế Triển Khai AWS Config
+# Tối ưu Chi phí quy mô lớn với AWS Config Conformance Packs
 
 Tìm hiểu cách cấu hình các quy tắc AWS Config, đóng gói chúng thành một đơn vị duy nhất - Bộ Quy tắc tuân thủ (Conformance Packs), cho phép triển khai và quản lý hàng trăm quy tắc Config trên toàn bộ tổ chức AWS, đảm bảo tiêu chuẩn compliance nhất quán qua tất cả tài khoản và regions chỉ với một thao tác duy nhất.
 
